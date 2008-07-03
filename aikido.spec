@@ -45,6 +45,8 @@ Aikido.
 %build
 #FIXME just use -DINSTALLDIR
 sed -i 's,__MANDRIVA_INSTALLDIR__,"%{aikido_libdir}",g' src/site.h
+
+export CPPFLAGS="`glib-config --cflags`"
 make
 
 %install
