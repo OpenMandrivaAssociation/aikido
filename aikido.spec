@@ -1,4 +1,4 @@
-%define aikido_libdir %_libdir/aikido/
+%define aikido_libdir %_prefix/lib/aikido/
 %define aikido_includedir %_includedir/aikido/
 
 Name: aikido
@@ -50,6 +50,9 @@ make
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr
 make install dest=$RPM_BUILD_ROOT/%{_prefix}
+
+# the install script will always place in lib/
+mv $RPM_BUILD_ROOT/%_prefix/lib $RPM_BUILD_ROOT/%_libdir/ || :
 
 # it will be stripped anyway:
 rm -f $RPM_BUILD_ROOT/%_bindir/aikido_g
