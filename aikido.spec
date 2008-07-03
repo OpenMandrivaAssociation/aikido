@@ -60,6 +60,7 @@ mv $RPM_BUILD_ROOT/%_includedir/*.h $RPM_BUILD_ROOT/%_includedir/unix \
 	$RPM_BUILD_ROOT/%aikido_includedir
 
 %files
+%doc README CHANGES COPYRIGHT examples
 %defattr(-,root,root,-)
 %{aikido_libdir}/aikido.zip
 %_bindir/aikido
