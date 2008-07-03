@@ -15,6 +15,7 @@ BuildRequires: glib-devel
 BuildRequires: gtk-devel
 BuildRequires: gcc-c++
 BuildRequires: libpcre-devel
+BuildRequires: zip
 
 %description
 Aikido is a relatively new programming language that can be used for rapid
