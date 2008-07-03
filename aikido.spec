@@ -10,6 +10,7 @@ Summary: A interpreted and object-oriented language with C++ semantics
 URL: http://aikido.sf.net/
 Source: http://downloads.sourceforge.net/aikido/aikido-%{version}_src.zip
 Patch0: aikido-1.40-find-systemzip-on-usrlib.patch
+Patch1: aikido-1.40-missing-includes.patch
 BuildRequires: glib-devel
 BuildRequires: gtk-devel
 BuildRequires: gcc-c++
@@ -38,6 +39,7 @@ Aikido.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 #FIXME just use -DINSTALLDIR
