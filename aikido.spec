@@ -4,13 +4,12 @@
 
 Name: aikido
 Version: 1.40
-Release: %mkrel 1
+Release: %mkrel 2
 License: Sun Public License
 Group: Development/Other
 Summary: A interpreted and object-oriented language with C++ semantics
 URL: http://aikido.sf.net/
 Source: http://downloads.sourceforge.net/aikido/aikido-%{version}_src.zip
-Patch0: aikido-1.40-find-systemzip-on-usrlib.patch
 Patch1: aikido-1.40-missing-includes.patch
 Patch2: aikido-1.40-find-modules-paths.patch
 BuildRequires: glib-devel
@@ -42,22 +41,16 @@ Aikido.
 
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 cp %_sourcedir/aikido-gtk.c %_builddir/%name-%version
 
 %build
-#FIXME just use -DINSTALLDIR
-sed -i -e 's,__MANDRIVA_INSTALLDIR__,"%{aikido_libdir}",g' \
-	-e 's,__MANDRIVA_INSTALLDIR_PLATFORM__,"%{aikido_platlibdir}",g' \
-	src/site.h
-
 # creates a dummy proxy module that links with libgtk-1.2.so.x.y.z
 %__cc -shared -fPIC `gtk-config --cflags` `gtk-config --libs` \
 	 -o libgtk.so aikido-gtk.c
 
-export CPPFLAGS="`glib-config --cflags`"
+export CPPFLAGS="`glib-config --cflags` '-DINSTALLDIR=\"%{aikido_platlibdir}:%{aikido_libdir}\"'"
 make
 
 %install
