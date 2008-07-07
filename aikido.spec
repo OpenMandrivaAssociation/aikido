@@ -14,7 +14,7 @@ Patch1: aikido-1.40-missing-includes.patch
 Patch2: aikido-1.40-find-modules-paths.patch
 BuildRequires: glib-devel
 BuildRequires: gtk-devel
-BuildRequires: gcc-c++
+BuildRequires: gcc3.3-c++
 BuildRequires: libpcre-devel
 BuildRequires: zip
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
