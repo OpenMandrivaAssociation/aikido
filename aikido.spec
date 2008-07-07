@@ -1,4 +1,5 @@
 %define aikido_libdir %_prefix/lib/aikido/
+%define aikido_platlibdir %_libdir/aikido/
 %define aikido_includedir %_includedir/aikido/
 
 Name: aikido
@@ -11,6 +12,7 @@ URL: http://aikido.sf.net/
 Source: http://downloads.sourceforge.net/aikido/aikido-%{version}_src.zip
 Patch0: aikido-1.40-find-systemzip-on-usrlib.patch
 Patch1: aikido-1.40-missing-includes.patch
+Patch2: aikido-1.40-find-modules-paths.patch
 BuildRequires: glib-devel
 BuildRequires: gtk-devel
 BuildRequires: gcc-c++
@@ -42,16 +44,25 @@ Aikido.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+cp %_sourcedir/aikido-gtk.c %_builddir/%name-%version
 
 %build
 #FIXME just use -DINSTALLDIR
-sed -i 's,__MANDRIVA_INSTALLDIR__,"%{aikido_libdir}",g' src/site.h
+sed -i -e 's,__MANDRIVA_INSTALLDIR__,"%{aikido_libdir}",g' \
+	-e 's,__MANDRIVA_INSTALLDIR_PLATFORM__,"%{aikido_platlibdir}",g' \
+	src/site.h
+
+# creates a dummy proxy module that links with libgtk-1.2.so.x.y.z
+%__cc -shared -fPIC `gtk-config --cflags` `gtk-config --libs` \
+	 -o libgtk.so aikido-gtk.c
 
 export CPPFLAGS="`glib-config --cflags`"
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 install -d $RPM_BUILD_ROOT/usr
 make install dest=$RPM_BUILD_ROOT/%{_prefix}
 
@@ -68,10 +79,18 @@ install -d $RPM_BUILD_ROOT/%aikido_includedir
 mv $RPM_BUILD_ROOT/%_includedir/*.h $RPM_BUILD_ROOT/%_includedir/unix \
 	$RPM_BUILD_ROOT/%aikido_includedir
 
+install -d $RPM_BUILD_ROOT/%aikido_platlibdir
+mv libgtk.so $RPM_BUILD_ROOT/%aikido_platlibdir
+mv $RPM_BUILD_ROOT/%_libdir/{libddk.so,libdtk.so} \
+	$RPM_BUILD_ROOT/%aikido_platlibdir
+
 %files
 %doc README CHANGES COPYRIGHT examples
 %defattr(-,root,root,-)
 %{aikido_libdir}/aikido.zip
+%{aikido_platlibdir}/libgtk.so
+%{aikido_platlibdir}/libddk.so
+%{aikido_platlibdir}/libdtk.so
 %_bindir/aikido
 %_bindir/aikido_o
 %_bindir/mkelf
@@ -80,8 +99,6 @@ mv $RPM_BUILD_ROOT/%_includedir/*.h $RPM_BUILD_ROOT/%_includedir/unix \
 %_libdir/libaikidomath.so
 %_libdir/libaikidonetwork.so
 %_libdir/libaikidosecurity.so
-%_libdir/libddk.so
-%_libdir/libdtk.so
 
 %files devel
 %{aikido_includedir}/aikido.h
