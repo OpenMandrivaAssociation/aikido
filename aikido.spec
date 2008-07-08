@@ -52,7 +52,7 @@ cp %_sourcedir/aikido-gtk.c %_builddir/%name-%version
 	 -o libgtk.so aikido-gtk.c
 
 export CPPFLAGS="`glib-config --cflags` '-DINSTALLDIR=\"%{aikido_platlibdir}:%{aikido_libdir}\"'"
-make
+make CXX=g++-3.3.6
 
 %install
 rm -rf $RPM_BUILD_ROOT
