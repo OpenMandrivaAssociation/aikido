@@ -4,7 +4,7 @@
 
 Name: aikido
 Version: 1.40
-Release: %mkrel 6
+Release: %mkrel 7
 License: Sun Public License
 Group: Development/Other
 Summary: A interpreted and object-oriented language with C++ semantics
