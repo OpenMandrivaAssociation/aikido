@@ -1,0 +1,67 @@
+diff -r 9099dc881990 -r e99bcc6a67e3 src/aikido.h
+--- a/src/aikido.h	Wed Jul 02 19:02:57 2008 -0300
++++ b/src/aikido.h	Thu Jul 03 01:50:22 2008 -0300
+@@ -102,6 +102,7 @@
+ #define __AIKIDO_H
+ 
+ #include "aikidotoken.h"
++#include <string.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <stdarg.h>
+diff -r 9099dc881990 -r e99bcc6a67e3 src/debug.cc
+--- a/src/debug.cc	Wed Jul 02 19:02:57 2008 -0300
++++ b/src/debug.cc	Thu Jul 03 01:50:22 2008 -0300
+@@ -35,6 +35,7 @@
+ #include "aikidotoken.h"
+ #include "aikido.h"
+ #include "aikidodebug.h"
++#include <cstdlib>
+ #include <stdlib.h>
+ #include <ctype.h>
+ #include "aikidointerpret.h"
+diff -r 9099dc881990 -r e99bcc6a67e3 src/mkelf.cc
+--- a/src/mkelf.cc	Wed Jul 02 19:02:57 2008 -0300
++++ b/src/mkelf.cc	Thu Jul 03 01:50:22 2008 -0300
+@@ -1,6 +1,8 @@
+ #include <iostream>
+ #include <fstream>
+ #include <stdio.h>
++#include <string.h>
++#include <stdlib.h>
+ #include <unistd.h>
+ #include <sys/stat.h>
+ #include <vector>
+diff -r 9099dc881990 -r e99bcc6a67e3 src/terminal.cc
+--- a/src/terminal.cc	Wed Jul 02 19:02:57 2008 -0300
++++ b/src/terminal.cc	Thu Jul 03 01:50:22 2008 -0300
+@@ -4,6 +4,7 @@
+ #include <stdio.h>
+ #include <unistd.h>
+ #include <stdarg.h>
++#include <string.h>
+ 
+ namespace aikido {
+ 
+diff -r 9099dc881990 -r e99bcc6a67e3 src/unix/driver.cc
+--- a/src/unix/driver.cc	Wed Jul 02 19:02:57 2008 -0300
++++ b/src/unix/driver.cc	Thu Jul 03 01:50:22 2008 -0300
+@@ -42,6 +42,7 @@
+ #endif
+ #include <iostream>
+ #include <stdio.h>
++#include <string.h>
+ 
+ const char *legal_notice = "Copyright (C) 2003 Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, California 95054, U.S.A. "
+         "All rights reserved.  U.S. Government Rights - Commercial software.  Government users are subject to the Sun Microsystems, "
+diff -r 9099dc881990 -r e99bcc6a67e3 src/zip.cc
+--- a/src/zip.cc	Wed Jul 02 19:02:57 2008 -0300
++++ b/src/zip.cc	Thu Jul 03 01:50:22 2008 -0300
+@@ -28,6 +28,7 @@
+ 
+ #include "aikidozip.h"
+ #include <stdlib.h>
++#include <string.h>
+ 
+ 
+ namespace zip {

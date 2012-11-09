@@ -1,0 +1,16 @@
+diff -r 90d18e2b5e0a -r c83f5d3200e8 src/parser.cc
+--- a/src/parser.cc	Fri Jul 04 18:46:08 2008 -0300
++++ b/src/parser.cc	Fri Jul 04 20:19:03 2008 -0300
+@@ -203,6 +203,12 @@ Aikido::Aikido (std::string objfile, std
+         }
+     }
+     
++#if defined(INSTALLDIR_PLATFORM)
++    importpaths.push_back (INSTALLDIR_PLATFORM);
++#endif
++#if defined(INSTALLDIR)
++    importpaths.push_back (INSTALLDIR);
++#endif
+     importpaths.push_back ("/usr/lib") ;		// always look in /usr/lib
+ #endif
+ #if defined (_OS_MACOSX)
