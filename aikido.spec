@@ -8,7 +8,7 @@ Release: %mkrel 7
 License: Sun Public License
 Group: Development/Other
 Summary: A interpreted and object-oriented language with C++ semantics
-URL: http://aikido.sf.net/
+URL: https://aikido.sf.net/
 Source: http://downloads.sourceforge.net/aikido/aikido-%{version}_src.zip
 Source1: aikido-gtk.c
 Patch1: aikido-1.40-missing-includes.patch
