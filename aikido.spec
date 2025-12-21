@@ -13,6 +13,7 @@ Source: http://downloads.sourceforge.net/aikido/aikido-%{version}_src.zip
 Source1: aikido-gtk.c
 Patch1: aikido-1.40-missing-includes.patch
 Patch2: aikido-1.40-find-modules-paths.patch
+BuildRequires:	make
 BuildRequires: glib-devel
 BuildRequires: gtk-devel
 BuildRequires: gcc3.3-c++
